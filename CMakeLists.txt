@@ -4,7 +4,7 @@ project(oradar_lidar)
 #=======================================
 # Compile setup (CATKIN, COLCON)
 #=======================================
-set(COMPILE_METHOD CATKIN)
+set(COMPILE_METHOD COLCON)
 
 set(CMAKE_BUILD_TYPE RELEASE)
 
