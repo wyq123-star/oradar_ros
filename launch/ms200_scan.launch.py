@@ -19,11 +19,11 @@ parameters=[
 '''
 
 def generate_launch_description():
-  # LiDAR publisher node
+  # LiDAR publisher node - 这个已经正确
   ordlidar_node = Node(
       package='oradar_lidar',
-      node_executable='oradar_scan',
-      node_name='MS200',
+      executable='oradar_scan',
+      name='MS200',
       output='screen',
       parameters=[
         {'device_model': 'MS200'},
@@ -40,19 +40,18 @@ def generate_launch_description():
       ]
   )
 
-  # base_link to laser_frame tf node
-  base_link_to_laser_tf_node = Node(
-    package='tf2_ros',
-    node_executable='static_transform_publisher',
-    node_name='base_link_to_base_laser',
-    arguments=['0','0','0.18','0','0','0','base_link','laser_frame']
-  )
-
+  # base_link to laser_frame tf node - 这个需要修改
+  # base_link_to_laser_tf_node = Node(
+  #   package='tf2_ros',
+  #   executable='static_transform_publisher', # 修改1: 参数名改为 executable
+  #   name='base_link_to_base_laser',          # 修改2: 参数名改为 name
+  #   arguments=['0', '0', '0.18', '0', '0', '0', 'base_link', 'laser_frame']
+  # )
 
   # Define LaunchDescription variable
   ord = LaunchDescription()
 
   ord.add_action(ordlidar_node)
-  ord.add_action(base_link_to_laser_tf_node)
+  # ord.add_action(base_link_to_laser_tf_node)
 
   return ord
